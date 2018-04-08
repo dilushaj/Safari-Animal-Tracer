@@ -179,7 +179,7 @@ function makeMarker(animal, position, timeout) {
             position: position,
             map: map,
             //animation: google.maps.Animation.DROP,
-            icon: icon,
+            icon: icon
         });
     }, timeout);
 }
@@ -188,6 +188,6 @@ function broadCast(){
 
 }
 
-
+function test(){}
 
 
