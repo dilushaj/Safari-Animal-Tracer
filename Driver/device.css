@@ -1,0 +1,46 @@
+#map{
+  height: 600px;
+  width: 80%;
+  float:left;
+}
+body{
+  background-color: rgba(37, 55, 54, 0.49);
+
+
+}
+h3{
+  color: black;
+  text-align: left;
+  //font-family: 'Oleo Script', cursive;
+  font-size: 28px;
+  text-align  : center;
+}
+.button {
+
+
+  padding:15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: rgba(58, 190, 161, 0.73);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #fff;
+  width:145px;
+  height:40px;
+}
+
+.button:hover {background-color: rgba(43, 48, 94, 0.86)
+}
+
+.button:active {
+  background-color: #cc83c4;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.text-box{
+  height:35px;
+  width:180px;
+}
