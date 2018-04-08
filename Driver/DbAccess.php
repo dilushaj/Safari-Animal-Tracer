@@ -6,7 +6,7 @@ class DbAccess
 
     function saveToLocalDatabase($animal, $longitude, $latitude, $broadcasted)
     {
-        $date = date("Y/m/d");
+
         date_default_timezone_set('	Asia/Colombo');
 
 
@@ -41,33 +41,35 @@ class DbAccess
     function queryLocalDatabase()
     {
         $conn1 = new SQLite3('mydatabase.sqlite');
-
+        $conn1->busyTimeout(5000);
+        $conn1->exec('PRAGMA journal_mode = wal;');
         $sql1 = "Select animalName ,longitude, latitude , cast(((strftime('%s', CURRENT_TIMESTAMP ) - strftime('%s', time)) /(60  )) as timeDiff) as diff from Animal where localStatus=='notlocallyDisplayed' and diff < 30 ";
 
-        //$sql2 = "UPDATE Animal SET localStatus='locallyDisplayed' where localStatus=='notlocallyDisplayed' and cast(((strftime('%s', CURRENT_TIMESTAMP ) - strftime('%s', time)) /(60  )) as timeDiff) < 30  ";
+        $sql2 = "UPDATE Animal SET localStatus='locallyDisplayed' where localStatus=='notlocallyDisplayed' and cast(((strftime('%s', CURRENT_TIMESTAMP ) - strftime('%s', time)) /(60  )) as timeDiff) < 30  ";
+        $conn1->query("begin transaction");
+
         $sth = $conn1->prepare($sql1);
-        //$conn1->close();
-        //unset($conn1);
+        $result = $sth->execute();
+        $myArray = array(); //...create an array...
+        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            $myArray[] = $row;
+
+        }
 
 
-        //$conn1->query("begin");
-        $result=$sth->execute();
-        //$conn1->query("commit");
-        //$conn1->closeCursor();
-
-        /* $conn2 = new SQLite3('mydatabase.sqlite');
-                $conn2->busyTimeout(6000);
-                $conn2->query($sql2);
-                $conn2->close();*/
-        return $result;
+        $conn1->query($sql2);
+        $conn1->query("commit");
+        $conn1->close();
+        return $myArray;
     }
 
-    function setMap($deviceId){
+    function setMap($deviceId)
+    {
         $conn2 = new mysqli("localhost", "root", "", "animaltracer1");
         if (mysqli_connect_error()) {
             die("Database connection failed: " . mysqli_connect_error());
         }
-        $sql2="SELECT longitude,latitude from park natural join device where deviceId='".$deviceId."'";
+        $sql2 = "SELECT longitude,latitude from park natural join device where deviceId='" . $deviceId . "'";
 
 
         $result = mysqli_query($conn2, $sql2);

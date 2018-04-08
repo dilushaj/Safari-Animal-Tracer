@@ -148,7 +148,7 @@ function queryDb() {
                 var latitude = courses[i].latitude;
                 var position = {lat: latitude, lng: longitude};
 
-                makeMarker(animal, position, 3000);
+                makeMarker(animal, position);
 
 
             }
@@ -158,7 +158,7 @@ function queryDb() {
 
 }
 
-function makeMarker(animal, position, timeout) {
+function makeMarker(animal, position) {
     var icon = "";
     if (animal == "elephant") {
         icon = "icons/elephant.png";
@@ -174,14 +174,20 @@ function makeMarker(animal, position, timeout) {
         icon = "icons/bear.png"
 
     }
-    window.setTimeout(function () {
-        new google.maps.Marker({
+
+      var marker= new google.maps.Marker({
             position: position,
             map: map,
-            //animation: google.maps.Animation.DROP,
+            animation: google.maps.Animation.DROP,
             icon: icon
         });
-    }, timeout);
+        setTimeout(function () {
+            marker.setMap(null);
+            delete marker;
+        }, 5000);
+        return marker;
+
+
 }
 function broadCast(){
     alert('Hello Dilusha')
