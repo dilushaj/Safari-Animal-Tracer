@@ -184,7 +184,7 @@ function makeMarker(animal, position, timeout) {
     }, timeout);
 }
 function broadCast(){
-
+    alert('Hello Dilusha')
 
 }
 
