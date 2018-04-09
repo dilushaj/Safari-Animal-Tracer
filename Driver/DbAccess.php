@@ -18,14 +18,13 @@ class DbAccess
 
     }
 
-    function saveToWebServer($animal, $longitude, $latitude, $deviceId)
+    function saveToWebServer($animal, $longitude, $latitude, $deviceId,$time)
     {
         $conn2 = new mysqli("localhost", "root", "", "animaltracer1");
         if (mysqli_connect_error()) {
             die("Database connection failed: " . mysqli_connect_error());
         }
-        date_default_timezone_set('	UTC');
-        $time = date("Y-m-d H:i:s", time());
+
         mysqli_query($conn2, "INSERT INTO animalscenery (animalName,longitude,latitude,time,deviceId)
 				VALUES('$animal','$longitude','$latitude','$time','$deviceId')");
 

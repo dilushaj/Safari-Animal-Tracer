@@ -7,14 +7,18 @@
         <script type= "text/javascript" src="jquery1.js" id="jq"></script>
         <script src="device.js"></script>
 
-        <script async defer
+        <script sync defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnd_83H7sRNr3PBi3GyBwAtCL8seHFKso&callback=initMap">
      </script>
-      <script>localDbQuery();//,query two databases also
+
+      <script>
+         localDbQuery();//,query two databases also
       </script>
 
+
+
   </head>
-  <body>
+  <body onload="broadCast()">
 
 
   <h3> Animal Tracer For Safari Drivers</h3>

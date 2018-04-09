@@ -16,8 +16,7 @@ function initMap() {
 }
 
 function setMap() {
-   // var longitude = 0;
-   // var latitude = 0;
+
     $.ajax({
         type: 'POST',
         url: 'setPark.php?',
@@ -72,8 +71,8 @@ function setCoordinates() {
 
 function changeMarkerPosition() {//changing the position of the marker with time.
     var latlng = getCoordinates();
-    var latitude = latlng[0] + 0.0001;
-    var longitude = latlng[1] + 0.0001;
+    var latitude = Math.round((latlng[0] + 0.0001) * 10000) / 10000;//getting upto 4 digits
+    var longitude = Math.round((latlng[1] + 0.0001) * 10000) / 10000;
     coordinates = [latitude, longitude];
     var position = new google.maps.LatLng(latitude, longitude);
     marker1.setPosition(position);
@@ -87,8 +86,6 @@ function getCoordinates() {
 
 //make animal popup
 function animalInvoke(animal) {
-   // var latlng = getCoordinates();
-   // var position = {lat: latlng[0], lng: latlng[1]};
     connectionAvailable(animal);
 
 
@@ -184,16 +181,28 @@ function makeMarker(animal, position) {
         setTimeout(function () {
             marker.setMap(null);
             delete marker;
-        }, 5000);
+        }, 1000*60*30);
         return marker;
 
 
 }
 function broadCast(){
-    alert('Hello Dilusha')
-
+    setInterval(push, 30000);
+    setInterval(poll,30000);
 }
 
-function test(){}
+function push(){
+    if(navigator.onLine){
+        $.ajax({
+            type: 'Get',
+            url: 'broadcast.php?',
+            success: function (){
+                alert('broadcasted successfully');
+            }
+        });
+    }
+}
 
-
+function poll(){
+    alert('hello buddy');
+}

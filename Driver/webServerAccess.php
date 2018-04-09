@@ -12,5 +12,7 @@ $deviceId="";
 while ($row = $result->fetchArray(SQLITE3_ASSOC)){
     $deviceId=$row['deviceId'] . '<br/>';
 }
+date_default_timezone_set('	UTC');
+$time = date("Y-m-d H:i:s", time());
 
-$dbAccess->saveTowebServer($animal, $longitude, $latitude,$deviceId);
+$dbAccess->saveTowebServer($animal, $longitude, $latitude,$deviceId,$time);
