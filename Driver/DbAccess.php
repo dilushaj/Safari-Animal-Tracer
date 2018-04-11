@@ -31,11 +31,16 @@ class DbAccess
 
     }
 
-    function queryWebServer()
+    function queryWebServer($deviceId)
     {
+        $conn = new mysqli("localhost", "root", "", "animaltracer1");
+        if (mysqli_connect_error()) {
+            die("Database connection failed: " . mysqli_connect_error());
+        }
+        mysqli_query($conn,"Select animalName ,longitude, latitude ,time, cast(((strftime('%s', CURRENT_TIMESTAMP ) - strftime('%s', time)) /(60  )) as timeDiff) as diff from animalscenery natural join device where  diff < 30 and parkName in(select parkName from device where deviceId='" . $deviceId . "') and deviceId!='" . $deviceId . "'");
 
-
-    }
+    }//Select animalName ,longitude, latitude ,time,deviceId,UNIX_TIMESTAMP(CURRENT_TIMESTAMP),UNIX_TIMESTAMP(time),UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - UNIX_TIMESTAMP(time) from animalscenery natural join device where UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - UNIX_TIMESTAMP(time) > 30 and parkName in(select parkName from device where deviceId="150DE") and deviceId!="150DE"
+//Select animalName ,longitude, latitude ,time,deviceId,UNIX_TIMESTAMP(CURRENT_TIMESTAMP),UNIX_TIMESTAMP(time),(UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - UNIX_TIMESTAMP(time))/60 from animalscenery natural join device where (UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - UNIX_TIMESTAMP(time))/60 > 30 and parkName in(select parkName from device where deviceId="150DE") and deviceId!="150DE"
 
     function queryLocalDatabase()
     {

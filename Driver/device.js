@@ -186,13 +186,13 @@ function makeMarker(animal, position) {
 
 
 }
-function broadCast(){
-    setInterval(push, 30000);
-    setInterval(poll,30000);
+function broadCast() {
+    if (navigator.onLine) {
+        setInterval(push, 30000);
+        setInterval(poll, 30000);
+    }
 }
-
 function push(){
-    if(navigator.onLine){
         $.ajax({
             type: 'Get',
             url: 'broadcast.php?',
@@ -201,8 +201,14 @@ function push(){
             }
         });
     }
-}
+
 
 function poll(){
-    alert('hello buddy');
+    $.ajax({
+        type: 'Get',
+        url: 'polling.php?',
+        success: function (){
+            alert('polled successfully');
+        }
+    });
 }
