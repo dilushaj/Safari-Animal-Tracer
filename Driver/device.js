@@ -189,7 +189,7 @@ function makeMarker(animal, position) {
 function broadCast() {
     if (navigator.onLine) {
         setInterval(push, 30000);
-        setInterval(poll, 30000);
+        //setInterval(poll, 30000);
     }
 }
 function push(){

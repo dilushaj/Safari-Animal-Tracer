@@ -4,15 +4,15 @@
 class DbAccess
 {
 
-    function saveToLocalDatabase($animal, $longitude, $latitude, $broadcasted)
+    function saveToLocalDatabase($animal, $longitude, $latitude, $broadcasted,$time)
     {
 
-        date_default_timezone_set('	Asia/Colombo');
+
 
 
         $displayed = "notlocallyDisplayed";
         $conn1 = new SQLite3('mydatabase.sqlite');
-        $sql = "INSERT INTO Animal (`animalName`, `longitude`, `latitude`,`globalStatus`,`localStatus`) VALUES ('$animal','$longitude','$latitude','$broadcasted' ,'$displayed')";
+        $sql = "INSERT INTO Animal (`animalName`, `longitude`, `latitude`,`time`,`globalStatus`,`localStatus`) VALUES ('$animal','$longitude','$latitude','$time','$broadcasted' ,'$displayed')";
         $conn1->query($sql);
 
 
@@ -31,16 +31,31 @@ class DbAccess
 
     }
 
-    function queryWebServer($deviceId)
+    function queryWebServer($deviceId,$time)
     {
+
+        //"2018-04-12 09:21:42",
+        $time1=date_format($time,'d/m/Y H:i:s');
+        echo gettype($time1);
         $conn = new mysqli("localhost", "root", "", "animaltracer1");
         if (mysqli_connect_error()) {
             die("Database connection failed: " . mysqli_connect_error());
         }
-        mysqli_query($conn,"Select animalName ,longitude, latitude ,time, cast(((strftime('%s', CURRENT_TIMESTAMP ) - strftime('%s', time)) /(60  )) as timeDiff) as diff from animalscenery natural join device where  diff < 30 and parkName in(select parkName from device where deviceId='" . $deviceId . "') and deviceId!='" . $deviceId . "'");
+        $query="Select animalName ,longitude, latitude ,time from animalscenery natural join device where((UNIX_TIMESTAMP($time1) - UNIX_TIMESTAMP(time))/60) < 30 and parkName in(select parkName from device where deviceId=\"150DE\") and deviceId!=\"150DE\"";
 
-    }//Select animalName ,longitude, latitude ,time,deviceId,UNIX_TIMESTAMP(CURRENT_TIMESTAMP),UNIX_TIMESTAMP(time),UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - UNIX_TIMESTAMP(time) from animalscenery natural join device where UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - UNIX_TIMESTAMP(time) > 30 and parkName in(select parkName from device where deviceId="150DE") and deviceId!="150DE"
-//Select animalName ,longitude, latitude ,time,deviceId,UNIX_TIMESTAMP(CURRENT_TIMESTAMP),UNIX_TIMESTAMP(time),(UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - UNIX_TIMESTAMP(time))/60 from animalscenery natural join device where (UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - UNIX_TIMESTAMP(time))/60 > 30 and parkName in(select parkName from device where deviceId="150DE") and deviceId!="150DE"
+       // $query="Select animalName ,longitude, latitude ,time from animalscenery natural join device where((UNIX_TIMESTAMP($time) - UNIX_TIMESTAMP(time))/60) > 30 and parkName in(select parkName from device where deviceId='" . $deviceId . "') and deviceId!='" . $deviceId . "'";
+        if ($is_query_run = mysqli_query($conn, $query)) {
+
+            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
+                echo $row['animalName'].'<br>';
+                //$this->saveToLocalDatabase($row['animalName'],$row['longitude'],$row['latitude'],"broadcasted",$row['time']);
+            }
+        }
+
+    }
+
+
+
 
     function queryLocalDatabase()
     {

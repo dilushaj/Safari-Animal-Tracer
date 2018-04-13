@@ -8,4 +8,8 @@ $deviceId="";
 while ($row = $result->fetchArray(SQLITE3_ASSOC)){
     $deviceId=$row['deviceId'] . '<br/>';
 }
-$dbAccess->queryWebServer($deviceId);
+
+date_default_timezone_set('Africa/Abidjan');
+$time = date("Y-m-d H:i:s", time());
+
+$dbAccess->queryWebServer($deviceId,$time);
