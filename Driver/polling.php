@@ -1,15 +1,13 @@
 <?php
 include "DbAccess.php";
 include "dbcon.php";
-$dbAccess=new DbAccess();
-$sql="Select deviceId from Device";
-$result = $conn1->query($sql);
-$deviceId="";
-while ($row = $result->fetchArray(SQLITE3_ASSOC)){
-    $deviceId=$row['deviceId'] . '<br/>';
+
+
+$sql1 = "Select deviceId from Device";
+$result1 = $conn1->query($sql1);
+$deviceId = "";
+while ($row = $result1->fetchArray(SQLITE3_ASSOC)) {
+    $deviceId = $row['deviceId'];
 }
-
-date_default_timezone_set('Africa/Abidjan');
-$time = date("Y-m-d H:i:s", time());
-
-$dbAccess->queryWebServer($deviceId,$time);
+$dbAccess = new DbAccess();
+$dbAccess->queryWebServer($deviceId);

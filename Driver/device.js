@@ -14,13 +14,12 @@ function initMap() {
     setMap();
 
 }
-
+//initially set the map
 function setMap() {
 
     $.ajax({
         type: 'POST',
         url: 'setPark.php?',
-        //dataType: 'json',
         success: function (result) {
 
             var courses = JSON.parse(result);
@@ -68,7 +67,7 @@ function setCoordinates() {
     setInterval(changeMarkerPosition, 200);
 }
 
-
+//get the current location of safari
 function changeMarkerPosition() {//changing the position of the marker with time.
     var latlng = getCoordinates();
     var latitude = Math.round((latlng[0] + 0.0001) * 10000) / 10000;//getting upto 4 digits
@@ -125,12 +124,12 @@ function connectionAvailable(animal) {
         });
     }
 }
-
+//query local database once per 3 seconds
 function localDbQuery() {
     setInterval(queryDb, 3000);
 
 }
-
+//make animal popups
 function queryDb() {
     $.ajax({
         type: 'POST',
@@ -178,7 +177,7 @@ function makeMarker(animal, position) {
             animation: google.maps.Animation.DROP,
             icon: icon
         });
-        setTimeout(function () {
+        setTimeout(function () {//marker will appear only 30 minute time.
             marker.setMap(null);
             delete marker;
         }, 1000*60*30);
@@ -189,7 +188,7 @@ function makeMarker(animal, position) {
 function broadCast() {
     if (navigator.onLine) {
         setInterval(push, 30000);
-        //setInterval(poll, 30000);
+        setInterval(poll, 30000);
     }
 }
 function push(){
