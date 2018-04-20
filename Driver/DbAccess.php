@@ -3,11 +3,25 @@
 
 class DbAccess
 {
+    function localDbConnect()
+    {
+        $conn1 = new SQLite3('mydatabase.sqlite');
+        return $conn1;
+    }
+
+    function webServerConnect()
+    {
+        $conn2 = new mysqli("localhost", "root", "", "animaltracer1");
+        if (mysqli_connect_error()) {
+            die("Database connection failed: " . mysqli_connect_error());
+        }
+        return $conn2;
+    }
 
     function saveToLocalDatabase($animal, $longitude, $latitude, $broadcasted, $time)
     {
         $displayed = "notlocallyDisplayed";
-        $conn1 = new SQLite3('mydatabase.sqlite');
+        $conn1 = $this->localDbConnect();
         $sql = "INSERT INTO Animal (`animalName`, `longitude`, `latitude`,`time`,`globalStatus`,`localStatus`) VALUES ('$animal','$longitude','$latitude','$time','$broadcasted' ,'$displayed')";
         $conn1->query($sql);
 
@@ -16,10 +30,7 @@ class DbAccess
 
     function saveToWebServer($animal, $longitude, $latitude, $deviceId, $time)
     {
-        $conn2 = new mysqli("localhost", "root", "", "animaltracer1");
-        if (mysqli_connect_error()) {
-            die("Database connection failed: " . mysqli_connect_error());
-        }
+        $conn2 = $this->webServerConnect();
 
         mysqli_query($conn2, "INSERT INTO animalscenery (animalName,longitude,latitude,time,deviceId)
 				VALUES('$animal','$longitude','$latitude','$time','$deviceId')");
@@ -29,10 +40,8 @@ class DbAccess
 
     function queryWebServer($deviceId)
     {
-        $conn2 = new mysqli("localhost", "root", "", "animaltracer1");
-        if (mysqli_connect_error()) {
-            die("Database connection failed: " . mysqli_connect_error());
-        }
+        $conn2 = $this->webServerConnect();
+
         $query = "Select animalName ,longitude, latitude ,time from animalscenery natural join device where((UNIX_TIMESTAMP(UTC_TIMESTAMP()) - UNIX_TIMESTAMP(time))/60) < 30 and parkName in(select parkName from device where deviceId='" . $deviceId . "' ) and deviceId!='" . $deviceId . "'";
         if ($is_query_run = mysqli_query($conn2, $query)) {
 
@@ -47,7 +56,7 @@ class DbAccess
 
     function queryLocalDatabase()
     {
-        $conn1 = new SQLite3('mydatabase.sqlite');
+        $conn1 = $this->localDbConnect();
         $conn1->busyTimeout(5000);
         $conn1->exec('PRAGMA journal_mode = wal;');
         $sql1 = "Select animalName ,longitude, latitude , cast(((strftime('%s', CURRENT_TIMESTAMP ) - strftime('%s', time)) /(60  )) as timeDiff) as diff from Animal where localStatus=='notlocallyDisplayed' and diff < 30 ";
@@ -72,14 +81,11 @@ class DbAccess
 
     function setMap($deviceId)
     {
-        $conn2 = new mysqli("localhost", "root", "", "animaltracer1");
-        if (mysqli_connect_error()) {
-            die("Database connection failed: " . mysqli_connect_error());
-        }
+        $conn2 = $this->webServerConnect();
         $sql2 = "SELECT longitude,latitude from park natural join device where deviceId='" . $deviceId . "'";
         $result = mysqli_query($conn2, $sql2);
         return $result;
-        }
+    }
 
 }
 

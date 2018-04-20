@@ -19,7 +19,6 @@
 <body>
 
 
-<!-- Masthead -->
 <header class="masthead text-white text-center">
     <div class="overlay"></div>
     <div class="container">
@@ -50,28 +49,49 @@
 <?php
 
 if (isset($_POST['deviceId'])) {
-
+    include "webCon.php";
     include "dbcon.php";
     $deviceId = $_POST['deviceId'];
     $sql = "Select * from device where deviceId='" . $deviceId . "'";
-    $conn = new mysqli("localhost", "root", "", "animaltracer1");
-    if (mysqli_connect_error()) {
-        die("Database connection failed: " . mysqli_connect_error());
-    }
+    $valid = False;
     if ($is_query_run = mysqli_query($conn, $sql)) {
 
         while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
-            if ($deviceId == $row['deviceId']) {
-                $sql = "INSERT INTO device(deviceId)
-				VALUES('$deviceId')";
-                $result = $conn1->query($sql);
+            if ($deviceId == $row['deviceId']) {//checking validity of deviceId
+                $valid = True;
+                $sql1 = "SELECT COUNT(*) from device";
+                $result1 = $conn1->query($sql1);
+                $count = 1;
+                while ($row = $result1->fetchArray(SQLITE3_ASSOC)) {
+                    $count = $row['COUNT(*)'];
+
+                }
+                if ($count == 0) {
+                    $sql = "INSERT INTO device(deviceId) VALUES('$deviceId')";
+                    $result = $conn1->query($sql);
+                    header("location: driverUi.php");
+                } elseif ($count == 1) {
+                    $sql2 = "SELECT deviceId from device";
+                    $result2 = $conn1->query($sql2);
+                    $device = "";
+                    while ($row = $result2->fetchArray(SQLITE3_ASSOC)) {
+                        $device = $row['deviceId'];
+
+                    }
+                    if ($device == $deviceId) {
+                        header("location: driverUi.php");
+                    } else {
+                        echo "<script> alert('DeviceId Missmatch')</script>";
+                    }
+                } else {
+                    echo "<script> alert('Invalid Input')</script>";
+                }
 
 
-                header("location: driverUi.php");
-            } else {
-                echo "<script> alert('Invalid DeviceId')</script>";
             }
         }
-
+        if ($valid == False) {
+            echo "<script> alert('Invalid DeviceId')</script>";
+        }
     }
 }
