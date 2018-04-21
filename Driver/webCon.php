@@ -1,14 +1,13 @@
 <?php
 
 
-$user="id5403109_root";
-$password="maths@95";
-$database="id5403109_animaltracer1";
-$hostname="mysql2.000webhost.com";
+$user="sql12233860";
+$password="kH12CJ4UZ3";
+$database="sql12233860";
+$hostname="sql12.freesqldatabase.com";
+$port="3306";
 
-
-$conn = new mysqli($hostname,$user,$password,$database);
-
+$conn = mysqli_connect($hostname,$user,$password,$database);
 if (mysqli_connect_error()) {
     die("Database connection failed: " . mysqli_connect_error());
 }

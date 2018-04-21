@@ -25,7 +25,8 @@
   <div id="map"></div>
 
   <div id="animal">
-  <button class="button" name="elephant"  onclick="animalInvoke(this.name)" >Elephant</button><br><br>
+
+  <button class="button" name="elephant"  onclick="animalInvoke(this.name)">Elephant</button><br><br>
   <button class="button" name="tiger" onclick="animalInvoke(this.name)" style="float: right">Tiger</button><br><br><br>
   <button class="button" name="lion" onclick="animalInvoke(this.name)" >Lion</button><br><br>
   <button class="button" name="fox" onclick="animalInvoke(this.name)" style="float: right">Fox</button><br><br><br>
