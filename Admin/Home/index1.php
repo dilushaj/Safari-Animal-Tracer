@@ -1,9 +1,10 @@
 <?php
+
 include '../../dbCon.php';
 session_start();
 $user=$_SESSION['username'];
 ?>
-<html>
+<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -33,7 +34,7 @@ $user=$_SESSION['username'];
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<!-- <link rel="shortcut icon" href="favicon.ico"> -->
-	
+
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/icomoon.css">
@@ -81,12 +82,7 @@ $user=$_SESSION['username'];
 						</a>
 					</li>
 
-					<li>
-						<a href="../Login/adminReg.php">
-							<i class="pe-7s-add-user"></i>
-							<p>Register Admin</p>
-						</a>
-					</li>
+
 
 					<li >
 						<a href="../Login/js/addMap.php">
@@ -141,7 +137,7 @@ $user=$_SESSION['username'];
 	<div class="fh5co-loader"></div>
 
 	<div id="wrap">
-		
+
 	<div id="fh5co-page">
 		<header id="fh5co-header" role="banner">
 			<div class="container">
@@ -159,7 +155,7 @@ $user=$_SESSION['username'];
 				  <div><img src="images/slider_3.jpg" alt="Free HTML5 Website Template"></div>
 
 				  <div><img src="images/slider_2.jpg" alt="Free HTML5 Website Template"></div>
-				  
+
 
 				</div>
 			</div>
@@ -167,7 +163,7 @@ $user=$_SESSION['username'];
 	</div>
 	</div>
 		<!-- Slider -->
-		
+
 
 
 
@@ -176,13 +172,13 @@ $user=$_SESSION['username'];
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-chevron-down"></i></a>
 	</div>
-	
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
-		</div>
+		</div>>
 	</body>
 </html>
 

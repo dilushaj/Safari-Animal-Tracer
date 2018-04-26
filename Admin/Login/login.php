@@ -77,7 +77,7 @@ if ((isset($_POST["username"])) && (isset($_POST["password"]))) {
     session_start();
     $_SESSION['username'] = $new_username;
 
-    $query = "SELECT * FROM admin WHERE Username='" . $new_username . "'";
+    $query = "SELECT * FROM admin WHERE UserName='" . $new_username . "'";
 
     if ($is_query_run = mysqli_query($conn, $query)) {
 
@@ -85,8 +85,11 @@ if ((isset($_POST["username"])) && (isset($_POST["password"]))) {
             if ($new_password == $row['Password']) {
 
                 $_SESSION['username'] = $new_username;
-
-                header("location: ../Home/index.php");
+                if($row['Type']=="admin"){
+                    header("location: ../Home/index.php");
+                }else {
+                    header("location: ../Home/index1.php");
+                }
             } else {
                 echo "<script> alert('Username and  Password miss match')</script>";
             }
