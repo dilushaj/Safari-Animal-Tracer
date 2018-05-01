@@ -14,6 +14,7 @@ function initMap() {
     setMap();
 
 }
+
 //initially set the map
 function setMap() {
 

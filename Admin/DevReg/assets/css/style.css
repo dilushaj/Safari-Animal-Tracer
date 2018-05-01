@@ -16,7 +16,11 @@ body {
     font-size: 16px;
     font-weight: 400;
 }
-
+#map{
+    height: 600px;
+    width: 100%;
+    float:left;
+}
 strong { font-weight: 700; }
 .red { color: #2c2727; }
 a:hover { text-decoration: none; }
@@ -215,6 +219,17 @@ a:hover { text-decoration: none; }
 @media (min-width: 768px) and (max-width: 979px) {
 
     .register form h2 { background: none; }
+
+}
+@media (max-width: 1200px) {
+
+    .register form h3 { background:none; }
+
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+    .register form h3 { background: none; }
 
 }
 

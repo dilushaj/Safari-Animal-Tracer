@@ -1,9 +1,9 @@
 <?php
 
 
-$user="sql12233860";
-$password="kH12CJ4UZ3";
-$database="sql12233860";
+$user="sql12235305";
+$password="dULWPjKQNf";
+$database="sql12235305";
 $hostname="sql12.freesqldatabase.com";
 $port="3306";
 

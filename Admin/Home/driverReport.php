@@ -104,12 +104,7 @@
                 </a>
             </li>
 
-            <li>
-                <a href="../Login/adminReg.php">
-                    <i class="pe-7s-add-user"></i>
-                    <p>Register Admin</p>
-                </a>
-            </li>
+
 
             <li>
                 <a href="../Login/js/addMap.php">
