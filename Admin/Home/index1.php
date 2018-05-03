@@ -1,9 +1,4 @@
-<?php
 
-include '../../dbCon.php';
-session_start();
-$user=$_SESSION['username'];
-?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -99,7 +94,7 @@ $user=$_SESSION['username'];
 					</li>
 
 					<li>
-						<a href="../Login/resetPass.php">
+						<a href="locationHistory.php">
 							<i class="pe-7s-search"></i>
 							<p>Location History</p>
 						</a>

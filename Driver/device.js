@@ -137,14 +137,12 @@ function queryDb() {
         url: 'showPopup.php?',
         dataType: 'json',
         success: function (result) {
-
             var courses = result;
             for (var i = 0; i < courses.length; i++) {
                 var animal = courses[i].animalName;
                 var longitude = courses[i].longitude;
                 var latitude = courses[i].latitude;
                 var position = {lat: latitude, lng: longitude};
-
                 makeMarker(animal, position);
 
 

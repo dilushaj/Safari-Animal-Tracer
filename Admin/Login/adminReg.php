@@ -57,7 +57,9 @@
                     </div>
 
                     <button type="submit" class="login__submit">Register Admin</button>
-
+                    <p class="login__signup"><a href="../Home/index1.php">Home</a></p>
+                    <br>
+                    <p class="login__signup"><a href="login.php">Log out</a></p>
                 </div>
 
             </div>

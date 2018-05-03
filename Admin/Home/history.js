@@ -18,7 +18,6 @@ function setMap(park) {
         type: 'GET',
         url: 'setPark.php?park=' + park,
         success: function (result) {
-
             var courses = JSON.parse(result);
             for (var i = 0; i < courses.length; i++) {
                 var longitude = Number(courses[i].longitude);
@@ -30,33 +29,29 @@ function setMap(park) {
                     map: map
                 });
 
-                marker.addListener('click', toggleBounce);
             }
         },
         error: function () {
             alert('Error');
-        }
+        },
     });
 
 
 }
 
-function queryDb(duration,animal,park) {
+function queryDb(duration, animal, park) {
     $.ajax({
-        type: 'POST',
-        url: 'showPopup.php?',
+        type: 'GET',
+        url: 'showPopup.php?duration=' + duration + '&park=' + park + '&animal=' + animal,
         dataType: 'json',
         success: function (result) {
-
             var courses = result;
             for (var i = 0; i < courses.length; i++) {
                 var animal = courses[i].animalName;
-                var longitude = courses[i].longitude;
-                var latitude = courses[i].latitude;
+                var longitude = parseFloat(courses[i].longitude);
+                var latitude = parseFloat(courses[i].latitude);
                 var position = {lat: latitude, lng: longitude};
-
                 makeMarker(animal, position);
-
 
             }
         }
@@ -66,33 +61,29 @@ function queryDb(duration,animal,park) {
 }
 
 function makeMarker(animal, position) {
+
     var icon = "";
     if (animal == "elephant") {
-        icon = "icons/elephant.png";
+        icon = "images/elephant.png";
     } else if (animal == "lion") {
-        icon = "icons/lion.png";
+        icon = "images/lion.png";
     } else if (animal == "tiger") {
-        icon = "icons/tiger.png";
+        icon = "images/tiger.png";
     } else if (animal == "wolf") {
-        icon = "icons/wolf.png";
+        icon = "images/wolf.png";
     } else if (animal == "fox") {
-        icon = "icons/fox.png";
+        icon = "images/fox.png";
     } else if (animal == "bear") {
-        icon = "icons/bear.png"
+        icon = "images/bear.png"
 
     }
 
-    var marker= new google.maps.Marker({
+     new google.maps.Marker({
         position: position,
         map: map,
         animation: google.maps.Animation.DROP,
         icon: icon
     });
-    setTimeout(function () {//marker will appear only 30 minute time.
-        marker.setMap(null);
-        delete marker;
-    }, 1000*60*30);
-    return marker;
 
 
 }

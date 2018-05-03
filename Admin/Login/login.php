@@ -46,7 +46,8 @@
                         <input type="password" class="login__input pass" placeholder="Password" name="password"/>
                     </div>
                     <button type="submit" class="login__submit">Sign in</button>
-                    <!--p class="login__signup"><a href="resetPass.php">Reset Password</a></p-->
+
+
                 </div>
 
             </div>

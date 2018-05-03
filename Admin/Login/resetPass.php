@@ -63,7 +63,9 @@ session_start();
                                    name="confPassword"/>
                         </div>
                         <button type="submit" class="login__submit">Change Password</button>
-
+                        <p class="login__signup"><a href="../Home/index1.php">Home</a></p>
+                        <br>
+                        <p class="login__signup"><a href="login.php">Log out</a></p>
                     </div>
 
                 </div>
@@ -98,7 +100,7 @@ if ((isset($_POST["currentPass"])) && (isset($_POST["newPassword"])) && (isset($
     $currentPass1 = md5($currentPass);
     $sql = "Select Password FROM admin where UserName='" . $user . "'";
     if ($is_query_run = mysqli_query($conn, $sql)) {
-        while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+        while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
             $password = $row['Password'];
         }
     }

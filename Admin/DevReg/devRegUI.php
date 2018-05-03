@@ -31,7 +31,7 @@
                         <h1><a href="">Device Register<span class="green">.</span></a></h1>
                     </div>
                     <div class="links span8">
-                        <a class="home" href="../Home/index.html" rel="tooltip" data-placement="bottom" data-original-title="Home"></a>
+                        <a class="home" href="../Home/index1.php" rel="tooltip" data-placement="bottom" data-original-title="Home"></a>
                         <a class="logout" href="../Login/login.php" rel="tooltip" data-placement="bottom" data-original-title="Logout"></a>
                     </div>
                 </div>
@@ -63,7 +63,6 @@
                             <?php endforeach; ?>
                         </select>
 
-                        <button type="button" name="AddPark"  onclick="location.href='../Login/js/addMap.php'"  >ADD NEW PARK</button><br><br>
 
                         <label for="Ownerid">Owner Id</label>
                         <input type="text" id="ownerid" name="ownerid" placeholder="Enter Owner Id..." pattern="[0-9]{3}+/[DR]">
@@ -72,7 +71,7 @@
                         <input type="text" id="ownername" name="ownername" placeholder="Responsible person...">
                         <label> Telephone Number 1(start with 94 instead of 0):  </label>
 						<input type="text" name="tpNum1" placeholder="1st telephone no.."><br>
-						<label> Telephone Number 2(start with 94 instead of 0):  </label> 
+						<label> Telephone Number 2(start with 94 instead of 0):  </label>
 						<input type="text" name="tpNum2" placeholder="2nd telephone no.."><br><br><br>
                         <button type="submit">REGISTER</button>
                     </form>

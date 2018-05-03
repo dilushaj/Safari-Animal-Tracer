@@ -24,11 +24,14 @@ class DbAccessTest extends TestCase
 
     public function testSaveToLocalDatabase()
     {
-
+        $db=new DbAccess();
+        $db->saveToLocalDatabase("wolf",80.8234,6.4723,"broadcasted",'2018-05-02 15:14:13');
     }
 
     public function testSaveToWebServer()
     {
+        $db=new DbAccess();
+        $db->saveToLocalDatabase("wolf",80.8234,6.4723,"broadcasted",'2018-05-02 15:14:13');
 
     }
 

@@ -1,10 +1,10 @@
 <?php
+include "Report.php";
 
-include "../../dbCon.php";
+$report=new Report();
+
 $park=$_GET['park'];
-echo "<script>alert('dilu')</script>";
-$sql = "SELECT longitude,latitude from park  where parkName='" . $park . "'";
-$result = mysqli_query($conn, $sql);
+$result=$report->setMap($park);
 $myArray = array(); //...create an array...
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     $myArray[] = $row;

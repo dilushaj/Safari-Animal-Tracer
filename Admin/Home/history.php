@@ -46,7 +46,7 @@
                 <h1><a href="">Location Report<span class="green">.</span></a></h1>
             </div>
             <div class="links span8">
-                <a class="home" href="../Home/index.html" rel="tooltip" data-placement="bottom" data-original-title="Home"></a>
+                <a class="home" href="index1.html" rel="tooltip" data-placement="bottom" data-original-title="Home"></a>
                 <a class="logout" href="../Login/login.php" rel="tooltip" data-placement="bottom" data-original-title="Logout"></a>
             </div>
         </div>
