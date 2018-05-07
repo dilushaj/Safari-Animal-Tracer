@@ -17,7 +17,13 @@ body {
   font-size: 16px;
   line-height: 1.7;
   color: #7f7f7f;
-  background: rgba(197, 242, 189, 0.09);
+  background: -moz-linear-gradient(top, rgba(152,240,221,1) 0%, rgba(144,211,89,0.48) 94%, rgba(143,209,81,0.48) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(152,240,221,1)), color-stop(94%, rgba(144,211,89,0.48)), color-stop(100%, rgba(143,209,81,0.48)));
+  background: -webkit-linear-gradient(top, rgba(152,240,221,1) 0%, rgba(144,211,89,0.48) 94%, rgba(143,209,81,0.48) 100%);
+  background: -o-linear-gradient(top, rgba(152,240,221,1) 0%, rgba(144,211,89,0.48) 94%, rgba(143,209,81,0.48) 100%);
+  background: -ms-linear-gradient(top, rgba(152,240,221,1) 0%, rgba(144,211,89,0.48) 94%, rgba(143,209,81,0.48) 100%);
+  background: linear-gradient(to bottom, rgba(152,240,221,1) 0%, rgba(144,211,89,0.48) 94%, rgba(143,209,81,0.48) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#98f0dd', endColorstr='#8fd151', GradientType=0 );
   position: relative;
 }
 @media screen and (max-width: 768px) {

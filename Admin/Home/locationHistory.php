@@ -54,6 +54,9 @@
                     <option value="lion">Lions</option>
                     <option value="wolf">Wolf</option>
                     <option value="fox">Fox</option>
+                    <option value="deer">Deer</option>
+                    <option value="crocodile">Crocodile</option>
+                    <option value="peacock">Peacock</option>
                     <option value="all">All Animals</option>
 
                 </select>

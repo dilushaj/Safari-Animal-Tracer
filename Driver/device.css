@@ -1,38 +1,44 @@
 #map{
-  height: 600px;
+  height: 550px;
   width: 80%;
   float:left;
 }
 body{
-  background-color: rgba(37, 55, 54, 0.49);
-
-
+  /*background-color: rgba(70, 206, 86, 0.31);*/
+  background: rgba(30,230,190,1);
+  background: -moz-linear-gradient(top, rgba(30,230,190,1) 0%, rgba(138,232,73,0.61) 94%, rgba(145,232,66,0.61) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(30,230,190,1)), color-stop(94%, rgba(138,232,73,0.61)), color-stop(100%, rgba(145,232,66,0.61)));
+  background: -webkit-linear-gradient(top, rgba(30,230,190,1) 0%, rgba(138,232,73,0.61) 94%, rgba(145,232,66,0.61) 100%);
+  background: -o-linear-gradient(top, rgba(30,230,190,1) 0%, rgba(138,232,73,0.61) 94%, rgba(145,232,66,0.61) 100%);
+  background: -ms-linear-gradient(top, rgba(30,230,190,1) 0%, rgba(138,232,73,0.61) 94%, rgba(145,232,66,0.61) 100%);
+  background: linear-gradient(to bottom, rgba(30,230,190,1) 0%, rgba(138,232,73,0.61) 94%, rgba(145,232,66,0.61) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1ee6be', endColorstr='#91e842', GradientType=0 );
 }
 h3{
-  color: black;
+  color: #000000;
   text-align: left;
-  //font-family: 'Oleo Script', cursive;
+//font-family: 'Oleo Script', cursive;
   font-size: 28px;
   text-align  : center;
 }
 .button {
 
 
-  padding:15px 25px;
-  font-size: 24px;
+  padding:10px 20px;
+  font-size: 20px;
   text-align: center;
   cursor: pointer;
   outline: none;
   color: #fff;
-  background-color: rgba(58, 190, 161, 0.73);
+  background-color: rgba(43, 48, 94, 0.86);
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 0 9px #fff;
-  width:145px;
-  height:40px;
+  width:130px;
+  height:35px;
 }
 
-.button:hover {background-color: rgba(43, 48, 94, 0.86)
+.button:hover {background-color: rgba(58, 190, 161, 0.73);
 }
 
 .button:active {
@@ -43,4 +49,43 @@ h3{
 .text-box{
   height:35px;
   width:180px;
+}
+@media only screen and (min-width: 700px) {
+  /* Styles */
+  .bubble {
+    height: 100px;
+    margin: 20px;
+  }
+  .bubble:after {
+    bottom: -50px;
+    border-width: 50px 50px 0;
+  }
+  .bubble:before {
+    top: 100px;
+    border-width: 52px 52px 0;
+  }
+  .bubble1 {
+    height: 100px;
+    margin: 20px;
+  }
+  .bubble1:after {
+    bottom: -50px;
+    border-width: 50px 50px 0;
+  }
+  .bubble1:before {
+    top: 100px;
+    border-width: 52px 52px 0;
+  }
+  .bubble2 {
+    height: 100px;
+    margin: 20px;
+  }
+  .bubble2:after {
+    bottom: -50px;
+    border-width: 50px 50px 0;
+  }
+  .bubble2:before {
+    top: 100px;
+    border-width: 52px 52px 0;
+  }
 }

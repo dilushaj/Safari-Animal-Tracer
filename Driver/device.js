@@ -168,13 +168,25 @@ function makeMarker(animal, position) {
     } else if (animal == "bear") {
         icon = "icons/bear.png"
 
+    }else if (animal == "deer") {
+        icon = "icons/deer.png";
+    } else if (animal == "crocodile") {
+        icon = "icons/crocodile.png";
+    } else if (animal == "peacock") {
+        icon = "icons/peacock.png";
+
     }
 
       var marker= new google.maps.Marker({
             position: position,
             map: map,
             animation: google.maps.Animation.DROP,
-            icon: icon
+          icon:{
+              url: icon,
+              scaledSize: new google.maps.Size(28, 28)
+
+          }
+
         });
         setTimeout(function () {//marker will appear only 30 minute time.
             marker.setMap(null);
@@ -210,3 +222,13 @@ function poll(){
         }
     });
 }
+function refresh(){
+    $.ajax({
+        type: 'Get',
+        url: 'refresh.php?',
+        success: function (){
+            alert('refresh successfully');
+        }
+    });
+}
+

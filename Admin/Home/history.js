@@ -74,15 +74,26 @@ function makeMarker(animal, position) {
     } else if (animal == "fox") {
         icon = "images/fox.png";
     } else if (animal == "bear") {
-        icon = "images/bear.png"
+        icon = "images/bear.png";
+    }else if (animal == "deer") {
+        icon = "images/deer.png";
+    } else if (animal == "crocodile") {
+        icon = "images/crocodile.png";
+    } else if (animal == "peacock") {
+        icon = "images/peacock.png";
 
     }
 
+    var iconBase="images/base.png";
      new google.maps.Marker({
         position: position,
         map: map,
         animation: google.maps.Animation.DROP,
-        icon: icon
+        icon:{
+            url: icon,
+            scaledSize: new google.maps.Size(28, 28),
+
+        }
     });
 
 

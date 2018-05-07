@@ -11,11 +11,11 @@ class DbAccess
 
     function webServerConnect()
     {
-        $user="sql12235305";
-        $password="dULWPjKQNf";
-        $database="sql12235305";
-        $hostname="sql12.freesqldatabase.com";
-        //$port="3306";
+        $user="sql2236776";
+        $password="cT6!mE8!";
+        $database="sql2236776";
+        $hostname="sql2.freesqldatabase.com";
+        $port="3306";
 
         $conn = mysqli_connect($hostname,$user,$password,$database);
         if (mysqli_connect_error()) {
@@ -91,6 +91,16 @@ class DbAccess
         $sql2 = "SELECT longitude,latitude from park natural join device where deviceId='" . $deviceId . "'";
         $result = mysqli_query($conn2, $sql2);
         return $result;
+    }
+
+    function refresh(){
+        $conn1 = $this->localDbConnect();
+        $conn1->query("begin transaction");
+        $sql = "Delete from animal";
+        $conn1->query($sql);
+        $conn1->query("commit");
+        $conn1->close();
+
     }
 
 }
