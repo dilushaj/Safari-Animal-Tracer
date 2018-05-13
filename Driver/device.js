@@ -7,14 +7,13 @@ var marker1;
 function initMap() {
     var uluru = {lat: 7.8731, lng: 80.7718};
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 18,
         center: uluru
     });
 
     setMap();
 
 }
-
 //initially set the map
 function setMap() {
 
@@ -54,10 +53,29 @@ function toggleBounce() {
     }
 }
 
-//get the GPS reading
+
+function gpsReader(){
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: 'GPS',
+        success: function(txt){
+            var lines = txt.split("\n");
+            var line=lines[lines.length-1].split(",");
+            var latitude=Number(line[0]);
+            var longitude=Number(line[1]);
+            coordinates=[latitude, longitude];
+        }
+    });
+    return coordinates;
+}
+
+
+//Setting the initial GPS reading value
 function setCoordinates() {
-    var latitude = Number(document.getElementById("text-box1").value);//should read from the GPS receiver
-    var longitude = Number(document.getElementById("text-box2").value);
+    var coords=gpsReader();
+    var latitude =coords[0];
+    var longitude = coords[1];
     coordinates = [latitude, longitude];
     var latlng = {lat: latitude, lng: longitude};
     marker1 = new google.maps.Marker({
@@ -68,11 +86,12 @@ function setCoordinates() {
     setInterval(changeMarkerPosition, 200);
 }
 
+
 //get the current location of safari
 function changeMarkerPosition() {//changing the position of the marker with time.
-    var latlng = getCoordinates();
-    var latitude = Math.round((latlng[0] + 0.0001) * 10000) / 10000;//getting upto 4 digits
-    var longitude = Math.round((latlng[1] + 0.0001) * 10000) / 10000;
+    var latlng = getCoordinates();//gpsReader();--------------------------------------------------------------------------------------
+    var latitude = Math.round((latlng[0] + 0.00001) * 100000) / 100000;//get the reading from GPS reciever upto 4 digits
+    var longitude = Math.round((latlng[1] + 0.00001) * 100000) / 100000;
     coordinates = [latitude, longitude];
     var position = new google.maps.LatLng(latitude, longitude);
     marker1.setPosition(position);
@@ -93,35 +112,36 @@ function animalInvoke(animal) {
 
 //send data to the databases according to the connection
 function connectionAvailable(animal) {
-    var latlng = getCoordinates();
+    var latlng = getCoordinates();//gpsReader()-------------------------------------------------------------------------------------
+
     var latitude = latlng[0];
     var longitude = latlng[1];
 
     if (navigator.onLine) {
-        alert("Device is online");
+        //alert("Device is online");
         $.ajax({
             type: 'Get',
             url: 'localDatabaseAccess.php?latitude=' + latitude + '&longitude=' + longitude + '&animal=' + animal + '&broadcasted=' + "broadcasted",
-            success: function () {
+            /*success: function () {
                 alert('Data saved to Local Database successfully');
-            }
+            }*/
         });
         $.ajax({
             type: 'Get',
             url: 'webServerAccess.php?latitude=' + latitude + '&longitude=' + longitude + '&animal=' + animal,
-            success: function () {
+            /*success: function () {
                 alert('Data saved to web Server successfully');
-            }
+            }*/
         });
 
     } else {
-        alert("Device is offline");
+        //alert("Device is offline");
         $.ajax({
             type: 'Get',
             url: 'localDatabaseAccess.php?latitude=' + latitude + '&longitude=' + longitude + '&animal=' + animal + '&broadcasted=' + "not broadcasted",
-            success: function () {
+            /*success: function () {
                 alert('Data saved to Local Database successfully');
-            }
+            }*/
         });
     }
 }
@@ -137,12 +157,14 @@ function queryDb() {
         url: 'showPopup.php?',
         dataType: 'json',
         success: function (result) {
+
             var courses = result;
             for (var i = 0; i < courses.length; i++) {
                 var animal = courses[i].animalName;
                 var longitude = courses[i].longitude;
                 var latitude = courses[i].latitude;
                 var position = {lat: latitude, lng: longitude};
+
                 makeMarker(animal, position);
 
 
@@ -166,8 +188,7 @@ function makeMarker(animal, position) {
     } else if (animal == "fox") {
         icon = "icons/fox.png";
     } else if (animal == "bear") {
-        icon = "icons/bear.png"
-
+        icon = "icons/bear.png";
     }else if (animal == "deer") {
         icon = "icons/deer.png";
     } else if (animal == "crocodile") {
@@ -177,22 +198,21 @@ function makeMarker(animal, position) {
 
     }
 
-      var marker= new google.maps.Marker({
-            position: position,
-            map: map,
-            animation: google.maps.Animation.DROP,
-          icon:{
-              url: icon,
-              scaledSize: new google.maps.Size(28, 28)
+    var marker= new google.maps.Marker({
+        position: position,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        icon:{
+            url: icon,
+            scaledSize: new google.maps.Size(28, 28)
 
-          }
-
-        });
-        setTimeout(function () {//marker will appear only 30 minute time.
-            marker.setMap(null);
-            delete marker;
-        }, 1000*60*30);
-        return marker;
+        }
+    });
+    setTimeout(function () {//marker will appear only 30 minute time.
+        marker.setMap(null);
+        delete marker;
+    }, 1000*60*30);
+    return marker;
 
 
 }
@@ -203,32 +223,72 @@ function broadCast() {
     }
 }
 function push(){
-        $.ajax({
-            type: 'Get',
-            url: 'broadcast.php?',
-            success: function (){
-                alert('broadcasted successfully');
-            }
-        });
-    }
+    $.ajax({
+        type: 'Get',
+        url: 'broadcast.php?',
+        /*success: function (){
+           alert('broadcasted successfully');
+        }*/
+    });
+}
 
 
 function poll(){
     $.ajax({
         type: 'Get',
         url: 'polling.php?',
-        success: function (){
+        /*success: function (){
             alert('polled successfully');
-        }
+        }*/
     });
 }
 function refresh(){
     $.ajax({
         type: 'Get',
         url: 'refresh.php?',
-        success: function (){
+        /*success: function (){
             alert('refresh successfully');
-        }
+        }*/
     });
 }
+function hostAvailable(){
+    //establish wifi connection
+    send();
+    recieve();
+}
+function send(){
+    $.ajax({
+        type: 'POST',
+        url: 'peerShare.php?',
+        dataType: 'json',
+        success: function (result) {
+            var courses = JSON.stringify(result);//send this string
+
+
+
+        }
+
+    });
+
+
+}
+
+function recieve(result){//recieve this string
+    var courses = JSON.parse(result);
+    for (var i = 0; i < courses.length; i++) {
+        var animal = courses[i].animalName;
+        var longitude = courses[i].longitude;
+        var latitude = courses[i].latitude;
+        var broadcast= courses[i].globalStatus;
+        var time=courses[i].time;
+        $.ajax({
+            type: 'Get',
+            url: 'peerRecieve.php?latitude=' + latitude + '&longitude=' + longitude + '&animal=' + animal + '&broadcasted=' + broadcast + '$time=' + time,
+        });
+    }
+
+
+}
+
+
 

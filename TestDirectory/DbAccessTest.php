@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 include '../Driver/DbAccess.php';
 class DbAccessTest extends TestCase
 {
-
+    /** @test */
     public function testLocalDbConnect()
     {
         $db=new DbAccess();
@@ -19,6 +19,8 @@ class DbAccessTest extends TestCase
 
     public function testWebServerConnect()
     {
+        $db=new DbAccess();
+        $db->WebServerConnect();
 
     }
 

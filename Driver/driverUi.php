@@ -18,7 +18,7 @@
 
 
   </head>
-  <body onload="broadCast()">
+  <body onload="broadCast(); setCoordinates();">
 
 
   <h3> Animal Tracer For Safari Drivers</h3>
@@ -33,16 +33,12 @@
       <button class="button"  name="wolf" onclick="animalInvoke(this.name)" style="float: right">Wolf</button><br><br>
       <button class="button"  name="crocodile" onclick="animalInvoke(this.name)" >Crocodile</button><br>
       <button class="button"  name="deer" onclick="animalInvoke(this.name)" style="float: right">Deer</button><br><br>
-      <button class="button"  name="peacock" onclick="animalInvoke(this.name)" >Peacock</button><br><br>
+      <button class="button"  name="peacock" onclick="animalInvoke(this.name)" >Peacock</button><br><br><br><br><br>
       <form action="DeviceUI.php">
           <button class="button"  name="logout" onclick="refresh();" type="submit" >LogOut</button>
       </form>
   </div>
   <br>
-
-  <input type="text" class= "text-box" name="lat" placeholder="Latitude" id="text-box1" pattern="^[0-9]\d{0,9}(\.\d{1,3})?%?$"><br><br>
-  <input type="text"  class= "text-box" name="long" placeholder="Longitude" id="text-box2"><br><br>
-  <button class="button" onclick="setCoordinates()" >Set</button><br><br>
   </body>
 </html>
 

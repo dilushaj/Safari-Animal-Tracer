@@ -10,11 +10,11 @@ class Report
 {
     function webServerConnect()
     {
-       /* $user="sql2236776";
-          $password="cT6!mE8!";
-          $database="sql2236776";
-          $hostname="sql2.freesqldatabase.com";
-          $port="3306";
+      /* $user="sql12236689";
+        $password="K5sNSDtjMl";
+        $database="sql12236689";
+        $hostname="sql12.freesqldatabase.com";
+        $port="3306";
 
         $conn = mysqli_connect($hostname,$user,$password,$database);
         if (mysqli_connect_error()) {
